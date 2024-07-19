@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
@@ -10,6 +10,7 @@ import {
   selectCustomerState,
   createCustomer,
 } from "../../features/customer/customerSlice";
+import { LoaderComponent } from "../LoaderComponent";
 
 const FormComponent = () => {
   const dispatch = useDispatch();
@@ -21,10 +22,15 @@ const FormComponent = () => {
     formState: { errors },
   } = useForm({});
   const customerResponse = useSelector(selectCustomerState);
+  const { customerLoading } = customerResponse;
 
   const onSubmit = (body) => {
     dispatch(createCustomer(body));
   };
+
+  useEffect(() => {
+    console.log(customerResponse);
+  }, [customerResponse]);
 
   return (
     <Box className={styles.box_main}>
@@ -80,6 +86,11 @@ const FormComponent = () => {
           </Box>
         </Box>
       </form>
+      {customerLoading && (
+        <Box>
+          <LoaderComponent />
+        </Box>
+      )}
     </Box>
   );
 };

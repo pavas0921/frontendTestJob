@@ -2,7 +2,7 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { createCustomerAPI } from "../../services/customer";
 
 const initialState = {
-  customers: [],
+  customers: {},
   customerLoading: false,
   customerMessage: null,
   customerHttpStatus: null,
@@ -35,7 +35,14 @@ export const CustomerSlice = createSlice({
         state.customerLoading = true;
       })
       .addCase(createCustomer.fulfilled, (state, action) => {
-        console.log("ACT", action);
+        state.customerLoading = false;
+        if (action.payload.statusCode === 201) {
+          state.customers = action.payload.data;
+          localStorage.setItem("createdCustomer", action.payload.data.id);
+          localStorage.setItem("customer_email", action.payload.data.email);
+          state.customerHttpStatus = action.payload.statusCode;
+          state.customerFlag = true;
+        }
       });
   },
 });
