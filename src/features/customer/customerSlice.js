@@ -1,5 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { createCustomerAPI } from "../../services/customer";
+import { clearState } from "../transactions/transactionSlice";
 
 const initialState = {
   customers: {},
@@ -22,10 +23,7 @@ export const CustomerSlice = createSlice({
   name: "customer",
   initialState,
   reducers: {
-    clearAlert: (state) => {
-      state.customerStatus = null;
-      state.customerHttpStatus = null;
-      state.customerMessage = null;
+    clearCustomerState: (state) => {
       state.customerFlag = false;
     },
   },
@@ -40,6 +38,7 @@ export const CustomerSlice = createSlice({
           state.customers = action.payload.data;
           localStorage.setItem("createdCustomer", action.payload.data.id);
           localStorage.setItem("customer_email", action.payload.data.email);
+          localStorage.setItem("address", action.payload.data.address);
           state.customerHttpStatus = action.payload.statusCode;
           state.customerFlag = true;
         }
@@ -47,6 +46,6 @@ export const CustomerSlice = createSlice({
   },
 });
 
-export const { clearAlert } = CustomerSlice.actions;
+export const { clearCustomerState } = CustomerSlice.actions;
 export const selectCustomerState = (state) => state.customers;
 export default CustomerSlice.reducer;

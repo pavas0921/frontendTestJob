@@ -18,7 +18,12 @@ export const createTransaction = createAsyncThunk(
 export const transactionSlice = createSlice({
   name: "transaction",
   initialState,
-  reducers: {},
+  reducers: {
+    clearState: (state) => {
+      state.transaction = {};
+      state.transactionFlag = false;
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(createTransaction.pending, (state) => {
@@ -26,10 +31,18 @@ export const transactionSlice = createSlice({
       })
       .addCase(createTransaction.fulfilled, (state, action) => {
         state.transactionLoading = false;
-        console.log("act", action.payload);
+        if (
+          action.payload.httpStatus === 200 ||
+          action.payload.httpStatus === 201
+        ) {
+          state.transactionFlag = true;
+          state.transaction = action.payload.data;
+          console.log("act", action.payload);
+        }
       });
   },
 });
 
+export const { clearState } = transactionSlice.actions;
 export const selectTransactionState = (state) => state.transaction;
 export default transactionSlice.reducer;
