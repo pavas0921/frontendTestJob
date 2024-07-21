@@ -28,6 +28,7 @@ const TransactionComponent = () => {
   const customerResponse = useSelector(selectCustomerState);
   const { customerLoading } = customerResponse;
   const transactionResponse = useSelector(selectTransactionState);
+  const { transactionLoading } = transactionResponse;
 
   const onSubmit = (body) => {
     const currentDate = new Date();
@@ -36,10 +37,13 @@ const TransactionComponent = () => {
     body.date = isoCurrentDateString;
     body.baseFee = +localStorage.getItem("baseFee");
     body.deliveryFee = +localStorage.getItem("deliveryFee");
+    body.productQty = +localStorage.getItem("produtcQty");
     body.total =
       +body.baseFee + +body.deliveryFee + +localStorage.getItem("price");
     body.customerID = +localStorage.getItem("createdCustomer");
     body.customer_email = localStorage.getItem("customer_email");
+    body.productPrice = +localStorage.getItem("productPrice");
+    body.productId = +localStorage.getItem("productId");
     console.log(body);
     dispatch(createTransaction(body));
   };
@@ -106,7 +110,7 @@ const TransactionComponent = () => {
           </Box>
         </Box>
       </form>
-      {customerLoading && (
+      {(customerLoading || transactionLoading) && (
         <Box>
           <LoaderComponent />
         </Box>
