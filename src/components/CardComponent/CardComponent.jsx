@@ -43,10 +43,11 @@ const CardComponent = () => {
     dispatch(clearState());
     dispatch(clearCustomerState());
     setShowCustomerForm(true);
-    localStorage.setItem("productId", item.id);
-    localStorage.setItem("price", item.price * productQty);
-    localStorage.setItem("baseFee", item.price * 0.2);
-    localStorage.setItem("deliveryFee", item.price * 0.2);
+    localStorage.setItem("productId", +item.id);
+    localStorage.setItem("price", +item.price * productQty);
+    localStorage.setItem("baseFee", +item.price * 0.2);
+    localStorage.setItem("deliveryFee", +item.price * 0.2);
+    localStorage.setItem("productPrice", +item.price);
     setOpenModal(true);
     console.log("item", item);
   };
