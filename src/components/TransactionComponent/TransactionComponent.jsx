@@ -28,6 +28,7 @@ const TransactionComponent = () => {
   const customerResponse = useSelector(selectCustomerState);
   const { customerLoading } = customerResponse;
   const transactionResponse = useSelector(selectTransactionState);
+  const { transactionLoading } = transactionResponse;
 
   const onSubmit = (body) => {
     const currentDate = new Date();
@@ -106,7 +107,7 @@ const TransactionComponent = () => {
           </Box>
         </Box>
       </form>
-      {customerLoading && (
+      {(customerLoading || transactionLoading) && (
         <Box>
           <LoaderComponent />
         </Box>

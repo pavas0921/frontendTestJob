@@ -89,3 +89,11 @@
   cursor: pointer; /* Cambia el cursor a una manita al pasar sobre la tarjeta */
   background-color: #cccbcb; /* Cambia el color de fondo al pasar sobre la tarjeta */
 }
+
+.box_columns {
+  width: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  flex-direction: column;
+}
