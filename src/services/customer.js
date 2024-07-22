@@ -1,6 +1,5 @@
 //const API_BASE_URL = "http://localhost:3000";
-const API_BASE_URL =
-  "http://ec2-3-143-110-192.us-east-2.compute.amazonaws.com:3000";
+const API_BASE_URL = "https://testbackend-sabn.onrender.com";
 
 export const createCustomerAPI = async (body) => {
   try {
