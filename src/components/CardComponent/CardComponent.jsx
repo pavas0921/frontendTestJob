@@ -90,8 +90,7 @@ const CardComponent = () => {
         <Card key={index} className={styles.card}>
           <CardContent
             sx={{
-              minHeight: "25vh",
-              maxHeight: "25vh",
+              height: "auto",
               width: "75%",
               display: "flex",
               justifyContent: "center",
@@ -133,8 +132,8 @@ const CardComponent = () => {
               </Typography>
             </Box>
             <Box className={styles.box_columns}>
-              <Box>
-                <Typography variant="h6" color="initial">
+              <Box sx={{ marginLeft: 7 }}>
+                <Typography sx={{ marginLeft: 1 }} variant="h6" color="initial">
                   Quantity
                 </Typography>
                 <Box>
@@ -149,7 +148,7 @@ const CardComponent = () => {
                   </IconButton>
                 </Box>
               </Box>
-              <Box>
+              <Box sx={{ marginLeft: 9 }}>
                 <Button
                   onClick={(event) => handleClick(event, item)}
                   variant="contained"
@@ -177,6 +176,7 @@ const CardComponent = () => {
               clearCustomerState={clearCustomerState}
               clearState={clearState}
               dispatch={dispatch}
+              setProductQty={setProductQty}
             />
           )}
         </ModalComponent>

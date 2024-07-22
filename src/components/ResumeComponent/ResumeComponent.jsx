@@ -11,12 +11,16 @@ const ResumeComponent = ({
   clearCustomerState,
   setShowCustomerForm,
   handleClose,
+  setProductQty,
 }) => {
   const closeModal = () => {
     handleClose();
     dispatch(clearState());
     dispatch(clearCustomerState());
     setShowCustomerForm(true);
+    localStorage.clear();
+    setShowCustomerForm(true);
+    setProductQty(0);
   };
   return (
     <Box className={styles.box_main}>
