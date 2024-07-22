@@ -26,6 +26,7 @@ import {
 import { TransactionComponent } from "../TransactionComponent";
 import { ResumeComponent } from "../ResumeComponent";
 import { ClearIcon } from "@mui/x-date-pickers";
+import { LoaderComponent } from "../LoaderComponent";
 
 const CardComponent = () => {
   const [openModal, setOpenModal] = useState(false);
@@ -33,7 +34,7 @@ const CardComponent = () => {
   const handleOpen = () => setOpenModal(true);
   const handleClose = () => setOpenModal(false);
   const dispatch = useDispatch();
-  const { products } = useSelector(selectProductState);
+  const { products, productsLoading } = useSelector(selectProductState);
   const { customerFlag } = useSelector(selectCustomerState);
   const [productQty, setProductQty] = useState(0);
   localStorage.setItem("produtcQty", productQty);
@@ -181,6 +182,8 @@ const CardComponent = () => {
           )}
         </ModalComponent>
       )}
+
+      {productsLoading && <LoaderComponent />}
     </Box>
   );
 };
