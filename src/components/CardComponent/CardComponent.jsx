@@ -17,6 +17,7 @@ import {
 import {
   selectProductState,
   getProducts,
+  updateStock,
 } from "../../features/product/productSlice";
 import {
   clearState,
@@ -79,8 +80,7 @@ const CardComponent = () => {
     if (transactionResponse.transactionFlag) {
       setShowCustomerForm(false);
       dispatch(clearCustomerState());
-      //dispatch(clearState());
-      console.log("res", transactionResponse.transaction.status);
+      dispatch(updateStock(localStorage.getItem("productId")));
     }
   }, [transactionResponse]);
 

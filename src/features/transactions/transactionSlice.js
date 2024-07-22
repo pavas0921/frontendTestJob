@@ -5,6 +5,7 @@ const initialState = {
   transaction: {},
   transactionLoading: false,
   transactionFlag: false,
+  product: {},
 };
 
 export const createTransaction = createAsyncThunk(
@@ -37,6 +38,7 @@ export const transactionSlice = createSlice({
         ) {
           state.transactionFlag = true;
           state.transaction = action.payload.data;
+          state.product = action.payload.product;
           console.log("act", action.payload);
         }
       });

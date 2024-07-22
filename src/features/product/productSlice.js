@@ -18,7 +18,17 @@ export const getProducts = createAsyncThunk("get/products", async () => {
 export const ProductSlice = createSlice({
   name: "products",
   initialState,
-  reducers: {},
+  reducers: {
+    updateStock: (state, i) => {
+      console.log("id", +i.payload);
+      const index = state.products.findIndex((item) => item.id == +i.payload);
+      if (index !== -1) {
+        const newStock =
+          state.products[index].stock - +localStorage.getItem("produtcQty");
+        state.products[index].stock = newStock;
+      }
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(getProducts.pending, (state) => {
@@ -31,6 +41,6 @@ export const ProductSlice = createSlice({
   },
 });
 
-export const { clearAlert } = ProductSlice.actions;
+export const { updateStock } = ProductSlice.actions;
 export const selectProductState = (state) => state.products;
 export default ProductSlice.reducer;
